@@ -97,5 +97,9 @@ async def check_link(message: types.Message):
 សូមធ្វើការពិនិត្រទៅលើតំណភ្ជាប់ខាងលើ រួចព្យាយាមម្ដងទៀត។""", parse_mode="html")
 
 
-if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+async def main() -> None:
+    """"Entry Point"""
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+  executor.start_polling(dp)

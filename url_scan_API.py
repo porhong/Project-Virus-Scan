@@ -21,6 +21,7 @@ def post_link(link_check):
 def get_link_result(result_link):
     response = requests.get(result_link, headers=headers)
     result = response.text
+    print(result)
     result = json.loads(result)
     result_after_scan = {}
     result_release = {}
