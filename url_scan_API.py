@@ -1,7 +1,6 @@
 import requests
 import json
 import time
-import operator
 
 url = "https://www.virustotal.com/api/v3/urls"
 treat_url = "https://www.virustotal.com/api/v3/popular_threat_categories"
@@ -31,6 +30,7 @@ def get_link_result(result_link):
     result_after_scan = {}
     result_release = {}
     result_treat = []
+    result_treat_count = 0
     antiVirusCompany = list(result["data"]["attributes"]["results"].keys())
     treat = list(threat_categories["data"])
     for item in antiVirusCompany:
@@ -38,12 +38,14 @@ def get_link_result(result_link):
         result_confirm_by_company = result["data"]["attributes"]["results"][item]["result"]
         if result_confirm_by_company in treat:
             result_treat.append(result_confirm_by_company)
+            result_treat_count += 1
     result_treat = list(set(result_treat))
     result_summary = result["data"]["attributes"]["stats"]
     result_status = result["data"]["attributes"]["status"]
     result_release["Short_result"] = result_summary
     result_release["result_status"] = result_status
     result_release["treat_status"] = result_treat
+    result_release["treat_count"] = result_treat_count
     return result_release
 
 
